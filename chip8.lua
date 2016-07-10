@@ -84,7 +84,7 @@ function CHIP8.new()
         SP = 0x0000,        -- The stack pointer
         running = false,    -- If false, then the CPU is paused
         drawing = false,    -- Whether or not something was drawn the last cycle
-        memory = {},  -- The memory for the CPU
+        memory = {},        -- The memory for the CPU
         stack = {},         -- The call stack.
         display = {},       -- Array of screen "pixel" bits.
         keyboard = {}       -- Array of which keys are being pressed
