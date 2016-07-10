@@ -135,12 +135,17 @@ function CHIP8:cycle()
     if (not self.running) then
         return
     end
-    
+
     -- Reset the drawing flag.
     self.drawing = false
     
     -- Fetch the next opcode.
     for i = 1, INSTR_PER_CYCLE do
+        -- Don't run if paused.
+        if (not self.running) then
+            return
+        end
+
         -- Make sure the next opcode is valid.
         if (self.PC >= MEM_SIZE) then
             return "program counter out of range"
@@ -157,7 +162,7 @@ function CHIP8:cycle()
             self.PC = self.PC + NEXT_INSTR
             self.PC = instructions[instr](self, opcode) or self.PC
         else
-            return "unknown opcode: "..opcode:format("%04X")
+            return "unknown opcode: "..("%04X"):format(opcode)
         end
     end
     
